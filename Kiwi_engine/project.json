@@ -1,0 +1,18 @@
+{
+    "name": "project",
+    "author": "CoolStop",
+    "description": "Cool Game",
+    "project-version": "1.0.0",
+
+    "window": {
+        "width": 96,
+        "height": 96,
+        "title": "4Kiwi Engine",
+        "icon": "extra/icon3.png"
+    },
+
+    "entry": "main.lua",
+    "path": "projects/Kiwi_engine/",
+
+    "engine_version": "0.3.0"
+}
