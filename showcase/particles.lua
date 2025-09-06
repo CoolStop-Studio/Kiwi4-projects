@@ -2,7 +2,7 @@ local self = {}
 
 local particles = {}
 local GRAVITY = Vector(20, 20)
-local delay = 0.1
+local delay = 0.02
 local delayLeft = delay
 
 function self._update(delta)
@@ -18,6 +18,9 @@ function self._update(delta)
 
     for i = 1, #particles do
         local particle = particles[i]
+        if not particle then
+            break
+        end
         particle.position.x = particle.position.x + particle.velocity.x * delta
         particle.position.y = particle.position.y + particle.velocity.y * delta
 

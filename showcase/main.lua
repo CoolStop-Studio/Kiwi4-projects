@@ -16,5 +16,5 @@ function _draw()
     circle._draw()
     cube._draw()
     particles._draw()
-    Draw.drawText("Welcome to the game!", Vector(1, 0), Color(255, 255, 255), myfont)
+    Draw.drawText("Kiwi Test", Vector(1, 0), Color(255, 255, 255), myfont)
 end

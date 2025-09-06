@@ -8,7 +8,7 @@
         "width": 96,
         "height": 96,
         "title": "4Kiwi Engine",
-        "icon": "extra/icon3.png"
+        "icon": "DEFAULT_ICON"
     },
 
     "entry": "main.lua",
