@@ -8,7 +8,11 @@ function self.newButton(default_tex, hover_tex, pressed_tex, pos1, pos2)
         pos1        = pos1,
         pos2        = pos2,
         active      = false, -- true if mouse down started inside
-        clicked     = false  -- true for one frame after release inside
+        clicked     = false,  -- true for one frame after release inside
+        
+        hovering = false,
+        pressed = false,
+        justPressed = false
     }
 
     -- expand clickable area by 1 pixel
@@ -16,15 +20,22 @@ function self.newButton(default_tex, hover_tex, pressed_tex, pos1, pos2)
     local hover_pos2 = Vector(pos2.x, pos2.y)
 
     function btn:update()
+        self.justPressed = false
         self.clicked = false
 
         -- mouse press started on button
         if Input.isMouseJustPressed() then
-            self.active = Input.isMouseInRect(hover_pos1, hover_pos2, true)
+            local in_rect = Input.isMouseInRect(hover_pos1, hover_pos2, true)
+            self.active = in_rect
+            if in_rect then
+                self.pressed = true
+                self.justPressed = true
+            end
         end
 
         -- mouse release after valid press
         if Input.isMouseJustReleased() then
+            self.pressed = false
             if self.active and Input.isMouseInRect(hover_pos1, hover_pos2, true) then
                 self.clicked = true
             end

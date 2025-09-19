@@ -23,8 +23,7 @@ function self._update(delta)
 end
 
 function self._draw()
-    Draw.drawText("FPS: " .. output_fps, Vector(0, 0), Color.WHITE)
-    Draw.drawText("APPS: " .. #RUNNING_APPS, Vector(0, 5), Color.WHITE)
+    Draw.drawText(output_fps, Vector(0, 0), Color.WHITE)
 end
 
 return self
