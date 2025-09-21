@@ -13,38 +13,18 @@ end
 
 local data = {}
 
-function _init()
-
-end
-
-local time = 0
-local i = 0
+local frame = 1
 local x = 0
 local y = 0
-local done = false
+local done_frame = false
+local done_video = false
 local scale_x = (options.right - options.left) / options.resolution
 local scale_y = (options.bottom - options.top) / options.resolution
 
-function draw_full()
-    for drawx = 0, #data do
-        for drawy = 0, #data[0] do
-            local theta1 = data[drawx][drawy][1]
-            local theta2 = data[drawx][drawy][2]
-
-            local hue = remap_looped(theta1 - theta2, 0, 2*math.pi, options.hue_min, options.hue_max)
-            local sat = remap_looped(theta1, 0, 2*math.pi, options.sat_min, options.sat_max)
-            local val = remap_looped(theta2, 0, 2*math.pi, options.val_min, options.val_max)
-
-            local color = Color.hsv(hue, sat, val)
-            Draw.drawPixel(Vector(drawx, drawy), color)
-        end
-    end
-end
-
 function _draw()
-    if done then return end
+    if done_frame then return end
+    if done_video then return end
 
-    i = i + 1
 
     local theta1 = options.left + (x + 0.5) * scale_x   -- +0.5 centers the pixel
     local theta2 = options.top  + (y + 0.5) * scale_y
@@ -67,8 +47,6 @@ function _draw()
     }
 
     pend = calculate_pendulum(pend, options.TIME_OFFSET)
-    local progress = (i  / (options.resolution * options.resolution))
-    print(string.sub(progress * 100, 1, 5) .. "%" .. "          -           " .. "Time left: " .. (time / progress) * (1 - progress) .. "s")
     data[x] = data[x] or {}
     data[x][y] = {pend.arm1.theta, pend.arm2.theta, theta1, theta2}
 
@@ -89,26 +67,30 @@ function _draw()
         y = y + 1
     end
     if y >= Config.window.height then
-        done = true
+        done_frame = true
     end
 
-    if not done then return end
+    if not done_frame then return end
 
+    print(frame .. "/" .. options.frames)
 
-    print("Render done in " .. time .. "s")
+    video.frames[frame] = data
+    print(video.frames[frame][5][5][1])
+    frame = frame + 1
 
-    draw_full()
+    options.update_values()
+    done_frame = false
+    x = 0
+    y = 0
+    data = {}
+
+    if frame >= options.frames then
+        done_video = true
+    end
 end
 
 function _update(delta)
-    time = time + delta
-    if Input.isMouseJustPressed() then
-        if Input.getMousePosition().x < 0 or Input.getMousePosition().y < 0 then
-            return
-        end
-        print("Rotation Top: " .. data[Input.getMousePosition().x][Input.getMousePosition().y][1], "Rotation Bottom: " .. data[Input.getMousePosition().x][Input.getMousePosition().y][2])
-        print("Start Rot: " .. data[Input.getMousePosition().x][Input.getMousePosition().y][3], "Start Rot " .. data[Input.getMousePosition().x][Input.getMousePosition().y][4])
-    end
+    if done_video then video._update(delta) return end
 end
 
 function calculate_pendulum(pendulum, time)

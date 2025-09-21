@@ -1,18 +1,18 @@
 {
-    "name": "Double Pendulum",
+    "name": "Double Pendulum Map",
     "author": "CoolStop",
-    "description": "Double Pendulum",
+    "description": "Double Pendulum Map",
     "project-version": "0.1",
 
     "window": {
         "width": 64,
         "height": 64,
-        "title": "Double Pendulum",
+        "title": "Double Pendulum Map",
         "icon": "DEFAULT_ICON"
     },
 
     "entry": "main.lua",
-    "path": "projects/pendmap/",
+    "path": "projects/pendmap/image/",
 
     "engine_version": "0.3.1"
 }

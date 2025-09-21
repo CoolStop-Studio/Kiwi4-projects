@@ -1,11 +1,10 @@
 local self = {}
 local options = require("options")
 
-local frames = {}
+self.frames = {}
+local time = 0
+local last_frame = 0
 local frame = 1
-
-
-local playing = false
 
 local function remap_looped(value, min_in, max_in, min_out, max_out)
     local range_in = max_in - min_in
@@ -17,7 +16,11 @@ local function remap_looped(value, min_in, max_in, min_out, max_out)
 end
 
 local function draw_full(frame_number)
-    local data = frames[frame_number]
+    Draw.clearScreen(Color.BLACK)
+
+    print("playing frame " .. frame_number .. "/" .. #self.frames)
+    local data = self.frames[frame_number]
+    print(data[5][5][1])
     for drawx = 0, #data do
         for drawy = 0, #data[0] do
             local theta1 = data[drawx][drawy][1]
@@ -33,20 +36,14 @@ local function draw_full(frame_number)
     end
 end
 
-function self.playVideo()
-    playing = true
-end
-
-function self._draw()
-    if playing then
+function self._update(delta)
+    if Input.isKeyJustPressed("space") then
         frame = frame + 1
-        draw_full(frame)
-        if frame > #frames then
+        if frame > #self.frames then
             frame = 1
         end
+        draw_full(frame)
     end
 end
-
-
 
 return self

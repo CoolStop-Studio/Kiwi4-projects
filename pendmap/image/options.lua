@@ -1,6 +1,6 @@
 local self = {}
 
-local zoom = 1
+local zoom = 50
 self.left = -math.pi * zoom
 self.right = math.pi * zoom
 self.top = -math.pi * zoom
@@ -27,7 +27,7 @@ self.STARTING_PENDULUM = {
     },
 }
 
-self.hue_min, self.hue_max = 0, 36        -- degrees
-self.sat_min, self.sat_max = 0.0, 0.0       -- 0-1
-self.val_min, self.val_max = 0.0, 1.0       -- 0-1
+self.hue_min, self.hue_max = 200, 360       -- degrees
+self.sat_min, self.sat_max = 0.5, 0.5       -- 0-1
+self.val_min, self.val_max = 0.2, 1.0       -- 0-1
 return self
