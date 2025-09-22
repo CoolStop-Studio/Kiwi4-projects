@@ -4,14 +4,14 @@ local pend1 = {
     arm1 = {
         alpha = 0, -- derivative of omega
         omega = 0, -- derivative of theta
-        theta = math.pi / 2, -- rotation
+        theta =  0.047860200582032, -- rotation
         length = 20,
         damping = 0.0
     },
     arm2 = {
         alpha = 0, -- derivative of omega
         omega = 0, -- derivative of theta
-        theta = math.pi / 2, -- rotation
+        theta =   -0.11903690913993, -- rotation
         length = 20,
         damping = 0.0
     },

@@ -83,6 +83,8 @@ function _draw()
     x = 0
     y = 0
     data = {}
+    scale_x = (options.right - options.left) / options.resolution
+    scale_y = (options.bottom - options.top) / options.resolution
 
     if frame >= options.frames then
         done_video = true

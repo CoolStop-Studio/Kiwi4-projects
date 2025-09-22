@@ -12,10 +12,6 @@ end
 
 local data = {}
 
-function _init()
-
-end
-
 local time = 0
 local i = 0
 local x = 0
@@ -30,9 +26,9 @@ function draw_full()
             local theta1 = data[drawx][drawy][1]
             local theta2 = data[drawx][drawy][2]
 
-            local hue = remap_looped(theta1, 0, 2*math.pi, options.hue_min, options.hue_max)
-            local sat = remap_looped(theta1 - theta2, 0, 2*math.pi, options.sat_min, options.sat_max)
-            local val = remap_looped(theta2, 0, 2*math.pi, options.val_min, options.val_max)
+            local hue = remap_looped(theta2 - theta1, 0, 2*math.pi, options.hue_min, options.hue_max)
+            local sat = remap_looped(theta1 + theta2, 0, 2*math.pi, options.sat_min, options.sat_max)
+            local val = remap_looped(theta1, 0, 2*math.pi, options.val_min, options.val_max)
 
             local color = Color.hsv(hue, sat, val)
             Draw.drawPixel(Vector(drawx, drawy), color)
@@ -110,10 +106,10 @@ function _update(delta)
     end
 end
 
-function calculate_pendulum(pendulum, time)
+function calculate_pendulum(pendulum, forward_time)
     local step = options.DELTA_STEP
     local timer = 0
-    while timer < time do
+    while timer < forward_time do
         pendulum = physics.UPDATE_PENDULUM(pendulum, step)
         timer = timer + step
     end

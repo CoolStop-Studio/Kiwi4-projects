@@ -1,17 +1,17 @@
 local self = {}
 
 local zoom = 1
-self.zoom_change = -0.1
-self.frames = 20
+self.zoom_change = 0.8
+self.frames = 40
 
 self.left = -math.pi * zoom
 self.right = math.pi * zoom
 self.top = -math.pi * zoom
 self.bottom = math.pi * zoom
-self.resolution = 128
+self.resolution = 512
 
 function self.update_values()
-    zoom = zoom + self.zoom_change
+    zoom = zoom * self.zoom_change
     self.left = -math.pi * zoom
     self.right = math.pi * zoom
     self.top = -math.pi * zoom
@@ -38,8 +38,8 @@ self.STARTING_PENDULUM = {
     },
 }
 
-self.hue_min, self.hue_max = 0, 36        -- degrees
-self.sat_min, self.sat_max = 0.0, 0.0       -- 0-1
+self.hue_min, self.hue_max = 200, 300        -- degrees
+self.sat_min, self.sat_max = 0.1, 0.5       -- 0-1
 self.val_min, self.val_max = 0.0, 1.0       -- 0-1
 
 return self

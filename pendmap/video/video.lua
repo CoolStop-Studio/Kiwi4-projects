@@ -20,7 +20,6 @@ local function draw_full(frame_number)
 
     print("playing frame " .. frame_number .. "/" .. #self.frames)
     local data = self.frames[frame_number]
-    print(data[5][5][1])
     for drawx = 0, #data do
         for drawy = 0, #data[0] do
             local theta1 = data[drawx][drawy][1]

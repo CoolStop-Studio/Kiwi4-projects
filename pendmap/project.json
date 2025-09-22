@@ -5,14 +5,14 @@
     "project-version": "0.1",
 
     "window": {
-        "width": 64,
-        "height": 64,
+        "width": 512,
+        "height": 512,
         "title": "Double Pendulum Map",
         "icon": "DEFAULT_ICON"
     },
 
     "entry": "main.lua",
-    "path": "projects/pendmap/image/",
+    "path": "projects/pendmap/video/",
 
     "engine_version": "0.3.1"
 }
